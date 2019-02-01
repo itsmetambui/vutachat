@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import Login from './login';
-import Chat from './chat';
+import Login from './Login';
+import Chat from './Chat';
 import client from './feathers';
 
 const Application = () => {
