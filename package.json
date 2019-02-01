@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node backend/src/",
-    "heroku-postbuild": "cd frontend/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "concurrently \"yarn build-backend\" \"yarn build-frontend\"",
+    "build-frontend": "cd frontend/ && yarn install && yarn install --only=dev --no-shrinkwrap && yarn build",
+    "build-backend": "cd backend/ && yarn install"
   },
   "repository": {
     "type": "git",
@@ -28,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/itsmetambui/vutachat/issues"
   },
-  "homepage": "https://github.com/itsmetambui/vutachat#readme"
+  "homepage": "https://github.com/itsmetambui/vutachat#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
 }
