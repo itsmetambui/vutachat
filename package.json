@@ -1,0 +1,24 @@
+{
+  "name": "vutachat",
+  "version": "1.0.0",
+  "description": "A personal chat application with Feathersjs and React",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/src/",
+    "heroku-postbuild": "cd frontend/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsmetambui/vutachat.git"
+  },
+  "keywords": [
+    "Feathersj",
+    "React"
+  ],
+  "author": "Tam Bui",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsmetambui/vutachat/issues"
+  },
+  "homepage": "https://github.com/itsmetambui/vutachat#readme"
+}
