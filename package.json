@@ -11,6 +11,14 @@
     "type": "git",
     "url": "git+https://github.com/itsmetambui/vutachat.git"
   },
+  "engines": {
+    "node": "^11.0.0",
+    "yarn": ">= 0.18.0"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "react-ui/node_modules"
+  ],
   "keywords": [
     "Feathersj",
     "React"
