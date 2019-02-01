@@ -62,7 +62,7 @@ const Chat = () => {
   };
 
   return (
-    <main className="flex flex-column">
+    <main className="flex flex-column" style={{height: '90vh'}}>
       <header className="title-bar flex flex-row flex-center">
         <div className="title-wrapper block center-element">
           <img className="logo" src="http://feathersjs.com/img/feathers-logo-wide.png"
@@ -81,16 +81,16 @@ const Chat = () => {
 
           <ul className="flex flex-column flex-1 list-unstyled user-list">
             {users.map(user => <li key={user._id}>
-              <a className="block relative" href="#">
+              <button className="block relative">
                 <img src={user.avatar} alt={user.email} className="avatar" />
                 <span className="absolute username">{user.email}</span>
-              </a>
+              </button>
             </li>)}
           </ul>
           <footer className="flex flex-row flex-center">
-            <a href="#" onClick={() => client.logout()} className="button button-primary">
+            <button onClick={() => client.logout()} className="button button-primary">
               Sign Out
-            </a>
+            </button>
           </footer>
         </aside>
 
