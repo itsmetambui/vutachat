@@ -68,13 +68,18 @@ const Chat = () => {
       <h1 className="header-primary chat-header">Here's my story <span role="img" aria-label="emoji-popcorn">🍿</span></h1>
       <PerfectScrollbar>
         <main className="chat-box" ref={chatBoxEl}>
-          {messages.map(message => <ChatMessage key={message._id} 
-            avatar={message.user.avatar} 
-            email={message.user.email} 
-            createdAt={message.createdAt} 
-            text={message.text}
-            />
-          )}
+          {messages.map(message => {
+            return (
+              <div>
+                <ChatMessage key={message._id} 
+                avatar={message.user.avatar} 
+                email={message.user.email} 
+                createdAt={message.createdAt} 
+                text={message.text}
+                />
+              </div>
+            )
+          })}
         </main>
       </PerfectScrollbar>
       <form className="chat-form" onSubmit={sendMessage}>
