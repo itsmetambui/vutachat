@@ -4,6 +4,8 @@ import Login from './Login';
 import Chat from './Chat';
 import client from './feathers';
 
+import './App.scss';
+
 const Application = () => {
   const [login, setLogin] = useState(null);
 

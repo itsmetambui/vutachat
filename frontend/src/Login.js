@@ -20,35 +20,14 @@ const Login = () => {
   };
 
   return (
-    <main className="login container">
-      <div className="row">
-        <div className="col-12 col-6-tablet push-3-tablet text-center heading">
-          <h1 className="font-100">Log in or signup</h1>
-          <p>{error && error.message}</p>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-12 col-6-tablet push-3-tablet col-4-desktop push-4-desktop">
-          <form className="form">
-            <fieldset>
-              <input className="block" type="email" name="email" placeholder="email" onChange={e => setEmail(e.target.value)} value={email} />
-            </fieldset>
-
-            <fieldset>
-              <input className="block" type="password" name="password" placeholder="password" onChange={e => setPassword(e.target.value)} value={password} />
-            </fieldset>
-
-            <button type="button" className="button button-primary block signup" onClick={login}>
-              Log in
-            </button>
-
-            <button type="button" className="button button-primary block signup" onClick={signup}>
-              Signup
-            </button>
-          </form>
-        </div>
-      </div>
-    </main>
+    <div className="login">
+      <h1 className="header-primary">Welcome to vutachat <span role="img" aria-label="emoji-100">💯</span></h1>
+      <form className="login-form">
+        <input type="email" className="login-form__input" name="email" placeholder="Could I have your email address?" onChange={e => setEmail(e.target.value)} value={email} />
+        <button className="login-form__btn"><span role="img" aria-label="emoji-submit">👉</span></button>
+      </form>
+      
+    </div>
   );
 };
 
