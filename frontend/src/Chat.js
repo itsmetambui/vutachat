@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
-import { Formik } from 'formik';
-import * as Yup from 'yup';
-
 import client from './feathers';
 import ChatMessage from './ChatMessage';
 
@@ -75,7 +72,7 @@ const Chat = () => {
             avatar={message.user.avatar} 
             email={message.user.email} 
             createdAt={message.createdAt} 
-            text={message.text} 
+            text={message.text}
             />
           )}
         </main>
