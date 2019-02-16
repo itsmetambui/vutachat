@@ -5,17 +5,28 @@ import * as Yup from 'yup';
 import client from './feathers';
 
 const Login = () => {
+  const [error, setError] = useState(null);
+
+  const login = async ({email, password}) => {
+    try {
+      await client.authenticate({strategy: 'local', email, password});
+    } catch(loginErr) {
+      try {
+        await client.service('users').create({ email, password });
+        await client.authenticate({strategy: 'local', email, password});
+      } catch(signupErr) {
+        setError(signupErr);
+      }
+    }
+  };
 
   return (
     <div className="login">
       <h1 className="header-primary">Welcome to vutachat <span role="img" aria-label="emoji-100">💯</span></h1>
       <Formik
-        initialValues={{ email: '' }}
+        initialValues={{ email: '', password: '123456' }} // For fast login
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 500);
+          login(values);
         }}
         validationSchema={Yup.object().shape({
           email: Yup.string()
