@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import moment from 'moment';
+import PerfectScrollbar from 'react-perfect-scrollbar'
+
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
 import client from './feathers';
+import ChatMessage from './ChatMessage';
 
 const messageService = client.service('messages');
 const userService = client.service('users');
@@ -57,63 +62,38 @@ const Chat = () => {
     if(newMessage) {
       messageService.create({ text: newMessage }).then(() => {
         setNewMessage('');
-      });
+      })
     }
   };
 
   return (
-    <main className="flex flex-column" style={{height: '90vh'}}>
-      <header className="title-bar flex flex-row flex-center">
-        <div className="title-wrapper block center-element">
-          <img className="logo" src="http://feathersjs.com/img/feathers-logo-wide.png"
-            alt="Feathers Logo" />
-          <span className="title">Chat</span>
-        </div>
-      </header>
+    <main className="chat">
+      <h1 className="header-primary chat-header">Here's my story <span role="img" aria-label="emoji-popcorn">🍿</span></h1>
+      <PerfectScrollbar>
+        <main className="chat-box" ref={chatBoxEl}>
+          {messages.map(message => <ChatMessage key={message._id} 
+            avatar={message.user.avatar} 
+            email={message.user.email} 
+            createdAt={message.createdAt} 
+            text={message.text} 
+            />
+          )}
+        </main>
+      </PerfectScrollbar>
+      <form className="chat-form" onSubmit={sendMessage}>
+        <input
+          id="newMessage"
+          placeholder="Type a message..."
+          type="text"
+          value={newMessage}
+          onChange={e => setNewMessage(e.target.value)}
+          className="chat-form__input"
+        />
 
-      <div className="flex flex-row flex-1 clear">
-        <aside className="sidebar col col-3 flex flex-column flex-space-between">
-          <header className="flex flex-row flex-center">
-            <h4 className="font-300 text-center">
-              <span className="font-600 online-count">{users.length}</span> users
-            </h4>
-          </header>
-
-          <ul className="flex flex-column flex-1 list-unstyled user-list">
-            {users.map(user => <li key={user._id}>
-              <button className="block relative">
-                <img src={user.avatar} alt={user.email} className="avatar" />
-                <span className="absolute username">{user.email}</span>
-              </button>
-            </li>)}
-          </ul>
-          <footer className="flex flex-row flex-center">
-            <button onClick={() => client.logout()} className="button button-primary">
-              Sign Out
-            </button>
-          </footer>
-        </aside>
-
-        <div className="flex flex-column col col-9">
-          <main className="chat flex flex-column flex-1 clear" ref={chatBoxEl}>
-            {messages.map(message => <div key={message._id} className="message flex flex-row">
-              <img src={message.user.avatar} alt={message.user.email} className="avatar" />
-              <div className="message-wrapper">
-                <p className="message-header">
-                  <span className="username font-600">{message.user.email}</span>
-                  <span className="sent-date font-300">{moment(message.createdAt).format('MMM Do, hh:mm:ss')}</span>
-                </p>
-                <p className="message-content font-300">{message.text}</p>
-              </div>
-            </div>)}
-          </main>
-
-          <form onSubmit={sendMessage} className="flex flex-row flex-space-between" id="send-message">
-            <input type="text" name="text" className="flex flex-1" onChange={e => setNewMessage(e.target.value)} value={newMessage} />
-            <button className="button-primary" type="submit">Send</button>
-          </form>
-        </div>
-      </div>
+        <button className="chat-form__btn" type="submit">
+          <span role="img" aria-label="emoji-submit">☝️</span>
+        </button>
+      </form>
     </main>
   );
 };

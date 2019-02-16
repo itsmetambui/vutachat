@@ -59,6 +59,7 @@ const Login = () => {
               />
               {errors.email &&
                 touched.email && <div className="input-feedback">{errors.email}</div>}
+              {error && <div className="input-feedback">{error.message}</div>}
 
               <button className="login-form__btn" type="submit" disabled={isSubmitting}>
                 <span role="img" aria-label="emoji-submit">👉</span>
