@@ -27,9 +27,15 @@ input {
   width: 65rem;
   display: flex;
   margin: 3rem;
+  position: relative;
 
   &__input {
-    flex: 1
+    flex: 1;
+
+    &--error {
+      flex: 1;
+      border: 1px solid red;
+    }
   }
 
   &__btn {
@@ -39,5 +45,11 @@ input {
     border: none;
     outline: none;
     cursor: pointer;
+  }
+
+  .input-feedback {
+    position: absolute;
+    bottom: -4rem;
+    font-size: 1.7rem;
   }
 }
