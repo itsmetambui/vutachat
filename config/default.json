@@ -41,5 +41,9 @@
       "httpOnly": false,
       "secure": false
     }
+  },
+  "master": {
+    "email": "MASTER_EMAIL",
+    "password": "MASTER_PASSWORD"
   }
 }
