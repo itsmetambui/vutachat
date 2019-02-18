@@ -3,7 +3,10 @@
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return async context => {
-    const { data } = context;
+    const { app, data, params } = context;
+
+    const master = await app.service('master-user').find();
+    const roomId = `${params.user.email}|${master.email}`;
 
     // Throw an error if we didn't get a text
     if(!data.text) {
@@ -22,6 +25,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
       text,
       // Set the user id
       userId: user._id,
+      roomId: roomId,
       // Add the current date
       createdAt: new Date().getTime()
     };

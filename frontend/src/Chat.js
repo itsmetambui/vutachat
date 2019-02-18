@@ -5,27 +5,24 @@ import client from './feathers';
 import ChatMessage from './ChatMessage';
 
 const messageService = client.service('messages');
-const userService = client.service('users');
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
-  const [users, setUsers] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const chatBoxEl = useRef(null);
 
-  useEffect(function fetchData() {
-    Promise.all([
-      messageService.find({
-        query: {
-          $sort: { createdAt: -1 },
-          $limit: 25
-        }
-      }),
-      userService.find()
-    ]).then( ([ messagePage, userPage ]) => {
-      setMessages(messagePage.data.reverse());
-      setUsers(userPage.data);
+  async function fetchData() {
+    const messagePage = await messageService.find({
+      query: {
+        $sort: { createdAt: -1 },
+        $limit: 25
+      }
     });
+    setMessages(messagePage.data.reverse());
+  }
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   useEffect(function addMessageCreatedListener() {
@@ -33,14 +30,6 @@ const Chat = () => {
     messageService.on('created', onMessageCreated);
     return function removeListener() {
       messageService.removeListener('created', onMessageCreated);
-    };
-  }, []);
-
-  useEffect(function addUserCreatedListener() {
-    const onUserCreated = user => setUsers(users => [...users, user]);
-    userService.on('created', onUserCreated);
-    return function removeListener() {
-      userService.removeListener('created', onUserCreated);
     };
   }, []);
 

@@ -8,7 +8,8 @@ module.exports = function (app) {
   const messages = new Schema({
     text: { type: String, required: true },
     name: { type: String, requrired: true},
-    userId: { type: String , required: true }
+    userId: { type: String , required: true },
+    roomId: { type: String , required: true },
   }, {
     timestamps: true
   });
