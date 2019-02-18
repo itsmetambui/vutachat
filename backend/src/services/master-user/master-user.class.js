@@ -5,20 +5,23 @@ class Service {
     this.masterUser = null;
   }
 
-  setup(app) {
+  async setup(app) {
     this.app = app;
-  }
 
-  async get (email, password) {
     if(!this.masterUser) {
-      const masterUser = await this.app.service('users').find({query: { email }});
-      if(masterUser) {
-        this.masterUser = masterUser[0];
+      const { email, password } = this.app.get('master');
+      const result = await this.app.service('users').find({query: { email }});
+      
+      if(result.total != 0) {
+        this.masterUser = result.data[0];
       } else {
         this.masterUser = await this.app.service('users').create({email, password});
       }
     }
-    return this.master;
+  }
+
+  async find () {
+    return this.masterUser;
   }
 }
 

@@ -56,8 +56,4 @@ app.use(express.errorHandler({ logger }));
 
 app.hooks(appHooks);
 
-// Retrieve master user
-const {email, password} = app.get('master');
-app.service('master-user').get(email, password);
-
 module.exports = app;

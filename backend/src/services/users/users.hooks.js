@@ -5,13 +5,14 @@ const {
 } = require('@feathersjs/authentication-local').hooks;
 
 const gravatar = require('../../hooks/gravatar');
+const addUserToRoomWithMaster = require('../../hooks/addUserToRoomWithMaster');
 
 module.exports = {
   before: {
     all: [],
     find: [ authenticate('jwt') ],
     get: [ authenticate('jwt') ],
-    create: [hashPassword(), gravatar()],
+    create: [hashPassword(), gravatar(), addUserToRoomWithMaster()],
     update: [ hashPassword(),  authenticate('jwt') ],
     patch: [ hashPassword(),  authenticate('jwt') ],
     remove: [ authenticate('jwt') ]
