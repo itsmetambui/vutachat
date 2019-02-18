@@ -23,6 +23,11 @@ class Service {
   async find () {
     return this.masterUser;
   }
+
+  async addToRoom(room) {
+    const updateRooms = this.masterUser.rooms ? this.masterUser.rooms.concat(room) : [room];
+    this.masterUser = await this.app.service('users').patch(this.masterUser._id, { rooms: updateRooms});
+  }
 }
 
 module.exports = function (options) {

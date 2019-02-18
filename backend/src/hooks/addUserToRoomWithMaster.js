@@ -7,10 +7,13 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     const master = await app.service('master-user').find();
     
     if(data.email == master.email) {
+      context.data.rooms = [];
       return context;
     }
 
-    context.data.rooms = [`${data.email}|${master.email}`];
+    const roomId = `${data.email}|${master.email}`;
+    context.data.rooms = [roomId];
+    app.service('master-user').addToRoom(roomId);
 
     // Best practice: hooks should always return the context
     return context;
