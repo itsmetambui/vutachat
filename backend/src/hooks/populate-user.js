@@ -6,6 +6,9 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     // Get `app`, `method`, `params` and `result` from the hook context
     const { app, method, result, params } = context;
 
+    // Delete roomId from message
+    delete params.query.roomId;
+
     // Make sure that we always have a list of messages either by wrapping
     // a single message into an array or by getting the `data` from the `find` method's result
     const messages = method === 'find' ? result.data : [ result ];
