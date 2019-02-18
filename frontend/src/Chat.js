@@ -70,12 +70,12 @@ const Chat = () => {
         <main className="chat-box" ref={chatBoxEl}>
           {messages.map(message => {
             return (
-              <div>
-                <ChatMessage key={message._id} 
-                avatar={message.user.avatar} 
-                email={message.user.email} 
-                createdAt={message.createdAt} 
-                text={message.text}
+              <div key={message._id} >
+                <ChatMessage
+                  avatar={message.user.avatar} 
+                  email={message.user.email} 
+                  createdAt={message.createdAt} 
+                  text={message.text}
                 />
               </div>
             )
@@ -90,7 +90,7 @@ const Chat = () => {
           value={newMessage}
           onChange={e => setNewMessage(e.target.value)}
           className="chat-form__input"
-          autocomplete="off"
+          autoComplete="off"
         />
 
         <button className="chat-form__btn" type="submit">
