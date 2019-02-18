@@ -90,6 +90,7 @@ const Chat = () => {
           value={newMessage}
           onChange={e => setNewMessage(e.target.value)}
           className="chat-form__input"
+          autocomplete="off"
         />
 
         <button className="chat-form__btn" type="submit">
