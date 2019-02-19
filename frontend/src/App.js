@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import Login from './Login';
+import LoginPage from './pages/LoginPage/LoginPage';
 import ChatPage from './pages/ChatPage/ChatPage';
 import client from './feathers';
 
@@ -32,7 +32,7 @@ const Application = () => {
   if(login) {
     return <ChatPage />;
   }
-  return <Login />;
+  return <LoginPage />;
 };
 
 export default Application;

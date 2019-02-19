@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import cx from 'classnames';
 
-import client from './feathers';
+import client from '../../feathers';
 
-const Login = () => {
+import styles from './LoginPage.module.scss';
+
+const LoginPage = () => {
   const [error, setError] = useState(null);
 
   const login = async ({email, password}) => {
@@ -21,11 +24,11 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
+    <div className={styles.LoginPage}>
       <h1 className="header-primary">Welcome to vutachat <span role="img" aria-label="emoji-100">💯</span></h1>
       <Formik
         initialValues={{ email: '', password: '123456' }} // For fast login
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values) => {
           login(values);
         }}
         validationSchema={Yup.object().shape({
@@ -45,7 +48,7 @@ const Login = () => {
             handleSubmit,
           } = props;
           return (
-            <form className="login-form" onSubmit={handleSubmit}>
+            <form className={styles.LoginForm} onSubmit={handleSubmit}>
               <input
                 id="email"
                 placeholder="Could I have your email address please?"
@@ -53,15 +56,17 @@ const Login = () => {
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={
-                  errors.email && touched.email ? 'login-form__input--error' : 'login-form__input'
-                }
+                className={cx({
+                  [styles.Input]: true,
+                  [styles.InputError]: errors.email && touched.email
+                })}
+                autoComplete="off"
               />
               {errors.email &&
-                touched.email && <div className="input-feedback">{errors.email}</div>}
-              {error && <div className="input-feedback">{error.message}</div>}
+                touched.email && <div className={styles.Feedback}>{errors.email}</div>}
+              {error && <div className={styles.Feedback}>{error.message}</div>}
 
-              <button className="login-form__btn" type="submit" disabled={isSubmitting}>
+              <button className={styles.Button} type="submit" disabled={isSubmitting}>
                 <span role="img" aria-label="emoji-submit">👉</span>
               </button>
             </form>
@@ -72,4 +77,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

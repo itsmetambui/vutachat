@@ -1,0 +1,45 @@
+.LoginPage {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.LoginForm {
+  width: 70%;
+  display: flex;
+  margin: 3rem;
+  position: relative;
+
+  @media only screen and (max-width: 37.5em) {
+    width: 100%;
+  }
+}
+
+.Input {
+  flex: 1;
+  text-align: center;
+  font-size: 2rem; 
+}
+
+.InputError {
+  border: 1px solid red;
+}
+
+.Button {
+  font-size: 4rem;
+  padding: 0 2rem;
+  background-color: black;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.Feedback {
+  position: absolute;
+  bottom: -4rem;
+  font-size: 1.7rem;
+}
