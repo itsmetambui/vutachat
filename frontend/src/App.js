@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Login from './Login';
-import Chat from './Chat';
+import ChatPage from './pages/ChatPage/ChatPage';
 import client from './feathers';
 
 import './App.scss';
@@ -30,7 +30,7 @@ const Application = () => {
   }, []);
   
   if(login) {
-    return <Chat />;
+    return <ChatPage />;
   }
   return <Login />;
 };

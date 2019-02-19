@@ -1,0 +1,17 @@
+.ChatForm {
+  display: flex;
+}
+
+.Input {
+  flex: 1;
+  text-align: left;
+}
+
+.Button {
+  font-size: 4rem;
+  padding: 0 2rem;
+  background-color: black;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
