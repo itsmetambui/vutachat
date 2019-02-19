@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
 import client from './feathers';
-import ChatMessage from './ChatMessage';
+import ChatMessage from './components/Message/Message';
 
 const messageService = client.service('messages');
 
