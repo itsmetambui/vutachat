@@ -8,8 +8,7 @@ import client from '../../feathers';
 
 import styles from './LoginPage.module.scss';
 
-const LoginPage = (props) => {
-  console.log('Render login');
+const LoginPage = ({isAuthenticated, isAdmin}) => {
   const [error, setError] = useState(null);
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
 
@@ -29,8 +28,8 @@ const LoginPage = (props) => {
     }
   };
 
-  if(props.isAuthenticated || redirectToReferrer) {
-    return <Redirect to="/" />;
+  if((isAuthenticated != null && isAdmin != null) || redirectToReferrer) {
+    return isAdmin ? <Redirect to="/admin" /> : <Redirect to="/" />;
   }
 
   return (

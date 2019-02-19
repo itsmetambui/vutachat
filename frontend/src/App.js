@@ -8,14 +8,15 @@ import {
 
 import LoginPage from './pages/LoginPage/LoginPage';
 import ChatPage from './pages/ChatPage/ChatPage';
+import AdminChatPage from './pages/AdminChatPage/AdminChatPage';
 import Spinner from './components/Spinner/Spinner';
 import client from './feathers';
 
 import styles from './App.module.scss';
 
-const Application = (props) => {
+const Application = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
-  console.log('Render app');
+  const [isAdmin, setIsAdmin] = useState(null);
 
   const authenticate = async () => {
     try {
@@ -31,8 +32,10 @@ const Application = (props) => {
   }, []);
 
   useEffect(function addAuthenticatedListener() {
-    const onAuthenticated = login => {
+    const onAuthenticated = async jwt => {
       setIsAuthenticated(true);
+      const payload = await client.passport.verifyJWT(jwt.accessToken);
+      setIsAdmin(payload.isAdmin);
     }
     client.on('authenticated', onAuthenticated);
     return function removeListener() {
@@ -56,7 +59,8 @@ const Application = (props) => {
     <Router>
       <Switch>
         <PrivateRoute exact path="/" component={ChatPage} isAuthenticated={isAuthenticated}/>
-        <Route path="/login" render={(props) => <LoginPage {...props} isAuthenticated={isAuthenticated} />}/>
+        <PrivateRoute exact path="/admin" component={AdminChatPage} isAuthenticated={isAuthenticated}/>
+        <Route path="/login" render={(props) => <LoginPage {...props} isAuthenticated={isAuthenticated} isAdmin={isAdmin} />}/>
         <Route component={NoMatchPage}/>
       </Switch>
     </Router>
@@ -66,7 +70,6 @@ const Application = (props) => {
 export default Application;
 
 const PrivateRoute = ({ isAuthenticated, component: Component, ...rest }) => {
-  console.log('Render private route');
   return (
     <Route
       {...rest}
