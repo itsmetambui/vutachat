@@ -8,12 +8,13 @@ import {
 
 import LoginPage from './pages/LoginPage/LoginPage';
 import ChatPage from './pages/ChatPage/ChatPage';
+import Spinner from './components/Spinner/Spinner';
 import client from './feathers';
 
-import './App.scss';
+import styles from './App.module.scss';
 
 const Application = (props) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
   console.log('Render app');
 
   const authenticate = async () => {
@@ -48,6 +49,8 @@ const Application = (props) => {
       client.removeListener('logout', onLogout);
     };
   }, []);
+
+  if(isAuthenticated == null) return <div className={styles.Container}><Spinner /></div>;
 
   return (
     <Router>
