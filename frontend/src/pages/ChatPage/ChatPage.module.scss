@@ -9,6 +9,17 @@
 
 .Header {
   margin-bottom: 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Button {
+  font-size: 4rem;
+  padding-left: 1rem;
+  background-color: black;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 .ChatBox {

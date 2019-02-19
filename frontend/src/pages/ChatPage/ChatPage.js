@@ -1,32 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import cx from 'classnames';
-import PerfectScrollbar from 'react-perfect-scrollbar'
+
+import {unstable_createResource as createResource} from 'react-cache'
 
 import client from '../../feathers';
-
+import fetchMessage from '../../services/MessageResource';
 import ChatBox from '../../components/ChatBox/ChatBox';
 import ChatForm from '../../components/ChatForm/ChatForm';
 
 import styles from './ChatPage.module.scss'
 
+const MessageResource = createResource(fetchMessage);
 const messageService = client.service('messages');
 
 const ChatPage = () => {
-  const [messages, setMessages] = useState([]);
-
-  async function fetchData() {
-    const messagePage = await messageService.find({
-      query: {
-        $sort: { createdAt: -1 },
-        $limit: 25
-      }
-    });
-    setMessages(messagePage.data.reverse());
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const messageList = MessageResource.read();
+  const [messages, setMessages] = useState(messageList);
 
   useEffect(function addMessageCreatedListener() {
     const onMessageCreated = message => setMessages(messages => [...messages, message]);
@@ -40,12 +28,17 @@ const ChatPage = () => {
     return messageService.create({ text: message });
   };
 
+  const logout = () => {
+    client.logout();
+  }
+
   return (
     <main className={styles.ChatPage}>
-      <h1 className={cx('header-primary', styles.Header)}>Here's my story <span role="img" aria-label="emoji-popcorn">🍿</span></h1>
-      <PerfectScrollbar>
-        <ChatBox className={styles.ChatBox} messages={messages} />
-      </PerfectScrollbar>
+      <div className={styles.Header}>
+        <h1 className="header-primary">Here's my story <span role="img" aria-label="emoji-popcorn">🍿</span></h1>
+        <button className={styles.Button} onClick={logout}><span role="img" aria-label="emoji-popcorn">👋</span></button>
+      </div>
+      <ChatBox className={styles.ChatBox} messages={messages} />
       <div className={styles.ChatForm}>
         <ChatForm className={styles.ChatForm} onSubmit={sendMessage} />
       </div>
@@ -54,5 +47,3 @@ const ChatPage = () => {
 };
 
 export default ChatPage;
-
-

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import client from '../../feathers';
 import ChatMessage from '../../components/Message/Message';
@@ -7,11 +8,18 @@ import styles from './ChatBox.module.scss';
 const messageService = client.service('messages');
 
 const ChatBox = ({messages}) => {
-  const chatBoxEl = useRef(null);
+  const scrollDivRef = useRef(null);
+  const contentRef = useRef(null);
 
   useEffect(function scrollToBottomEffect() {
-    const scrollToBottom = el => el.scrollTop = el.scrollHeight - el.clientHeight;
-    const handler = () => scrollToBottom(chatBoxEl.current);
+    const scrollToBottom = (scrollDivEl, contentEl) => {
+      scrollDivEl.scrollTop = contentEl.scrollHeight - scrollDivEl.clientHeight;
+    }
+    const handler = () => {
+      setTimeout(() => {
+        scrollToBottom(scrollDivRef.current._ps.element, contentRef.current);
+      }, 100); // Content element height update after handler running => delay 100s
+    }
     handler();
     messageService.on('created', handler);
     return function removeListener () { 
@@ -20,20 +28,22 @@ const ChatBox = ({messages}) => {
   }, []);
 
   return (
-    <main className={styles.ChatBox} ref={chatBoxEl}>
-      {messages.map(message => {
-        return (
-          <div key={message._id} >
-            <ChatMessage
-              avatar={message.user.avatar} 
-              email={message.user.email} 
-              createdAt={message.createdAt} 
-              text={message.text}
-            />
-          </div>
-        )
-      })}
-    </main>
+    <PerfectScrollbar ref={scrollDivRef}>
+      <main className={styles.ChatBox} ref={contentRef}>
+        {messages.map(message => {
+          return (
+            <div key={message._id} >
+              <ChatMessage
+                avatar={message.user.avatar} 
+                email={message.user.email} 
+                createdAt={message.createdAt} 
+                text={message.text}
+              />
+            </div>
+          )
+        })}
+      </main>
+    </PerfectScrollbar>
   );
 };
 
