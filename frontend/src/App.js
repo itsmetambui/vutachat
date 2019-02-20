@@ -47,8 +47,10 @@ const Application = () => {
     };
   }, []);
 
-  if(isAuthenticated == null || isAdmin == null) return <div className={styles.Container}><Spinner /></div>;
-  if(!isAuthenticated) return <LoginPage />
+  const spinner = <div className={styles.Container}><Spinner /></div>;
+  if(isAuthenticated == null) return spinner;
+  if(!isAuthenticated) return <LoginPage />;
+  if(isAdmin == null) return spinner;
   if(isAdmin) return <Suspense fallback={<div className={styles.Container}><Spinner /></div>}><AdminChatPage /></Suspense>;
   return <Suspense fallback={<div className={styles.Container}><Spinner /></div>}><ChatPage /></Suspense>;
 };

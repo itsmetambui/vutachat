@@ -17,6 +17,7 @@ const ChatBox = ({messages}) => {
     }
     const handler = () => {
       setTimeout(() => {
+        if(scrollDivRef.current == null) return;
         scrollToBottom(scrollDivRef.current._ps.element, contentRef.current);
       }, 100); // Content element height update after handler running => delay 100s
     }
