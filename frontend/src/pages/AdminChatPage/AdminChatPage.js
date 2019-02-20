@@ -5,8 +5,11 @@ import client from '../../feathers';
 import fetchUserAndMessage from '../../services/AdminChatResource';
 import ChatBox from '../../components/ChatBox/ChatBox';
 import ChatForm from '../../components/ChatForm/ChatForm';
+import UserSelect from '../../components/UserSelect/UserSelect';
 
 import styles from './AdminChatPage.module.scss'
+import fetchUser from '../../services/UserResource';
+import fetchMessage from '../../services/MessageResource';
 
 const AdminChatResource = createResource(fetchUserAndMessage);
 const messageService = client.service('messages');
@@ -35,38 +38,37 @@ const AdminChatPage = () => {
   }, []);
 
   const sendMessage = async message => {
-    return messageService.create({ text: message });
+    return messageService.create({ text: message, roomId: selectedUser.rooms[0] });
   };
 
   const logout = () => {
     client.logout();
   }
 
+  const handleUserSelected = async user => {
+    setSelectedUser(user);
+    const messages = await fetchMessage(user.rooms[0]);
+    setMessages(messages);
+  }
+
   return (
     <div className={styles.AdminChatPage}>
+      <div className={styles.Header}>
+        <h1 className="header-primary">Here's my story <span role="img" aria-label="emoji-popcorn">🍿</span></h1>
+        <button className={styles.Button} onClick={logout}><span role="img" aria-label="emoji-popcorn">👋</span></button>
+      </div>
 
       <aside className={styles.Sidebar}>
-        <ul className="flex flex-column flex-1 list-unstyled user-list">
-          {users.map(user => <li key={user._id}>
-            <button className="block relative">
-              <img src={user.avatar} alt={user.email} className="avatar" />
-              <span className="absolute username">{user.email}</span>
-            </button>
-          </li>)}
-        </ul>
+        <UserSelect users={users} onChange={handleUserSelected} />
       </aside>
 
-      <main className={styles.Main}>
-        <div className={styles.Header}>
-          <h1 className="header-primary">Here's my story <span role="img" aria-label="emoji-popcorn">🍿</span></h1>
-          <button className={styles.Button} onClick={logout}><span role="img" aria-label="emoji-popcorn">👋</span></button>
-        </div>
-        
-        <ChatBox className={styles.ChatBox} messages={messages} />
-        <div className={styles.ChatForm}>
-          <ChatForm className={styles.ChatForm} onSubmit={sendMessage} />
-        </div>
-      </main>
+      <div className={styles.ChatBox}>
+        <ChatBox messages={messages} />
+      </div>
+      
+      <div className={styles.ChatForm}>
+        <ChatForm onSubmit={sendMessage} />
+      </div>
     </div>
     
   );

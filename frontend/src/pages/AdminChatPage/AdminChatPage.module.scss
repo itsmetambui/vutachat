@@ -1,20 +1,25 @@
-.Main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.AdminChatPage {
+  padding: 5rem 2rem 0 2rem;
   height: 100vh;
+  width: 100vw;
 
-  padding: 5rem 5rem 0 5rem;
+  display: grid;
+  grid-template-areas:
+    'header header'
+    'sidebar chatbox'
+    'sidebar form';
+  grid-gap: 2rem;
 }
 
 .Sidebar {
-  
+  grid-area: sidebar;
 }
 
 .Header {
   margin-bottom: 3rem;
   display: flex;
   justify-content: space-between;
+  grid-area: header;
 }
 
 .Button {
@@ -27,10 +32,12 @@
 }
 
 .ChatBox {
-  flex: 1;
+  grid-area: chatbox;
+  height: 70vh; //TODO: investigate other elegant solutions
 }
 
 .ChatForm {
   margin-top: 3rem;
   margin-bottom: 2rem;
+  grid-area: form;
 }
