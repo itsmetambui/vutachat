@@ -47,9 +47,9 @@ const Application = () => {
     };
   }, []);
 
-  if(isAuthenticated == null) return <div className={styles.Container}><Spinner /></div>;
+  if(isAuthenticated == null || isAdmin == null) return <div className={styles.Container}><Spinner /></div>;
   if(!isAuthenticated) return <LoginPage />
-  if(isAdmin) return <AdminChatPage />
+  if(isAdmin) return <Suspense fallback={<div className={styles.Container}><Spinner /></div>}><AdminChatPage /></Suspense>;
   return <Suspense fallback={<div className={styles.Container}><Spinner /></div>}><ChatPage /></Suspense>;
 };
 

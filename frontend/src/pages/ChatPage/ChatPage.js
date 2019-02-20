@@ -13,8 +13,7 @@ const MessageResource = createResource(fetchMessage);
 const messageService = client.service('messages');
 
 const ChatPage = () => {
-  const messageList = MessageResource.read();
-  const [messages, setMessages] = useState(messageList);
+  const [messages, setMessages] = useState(MessageResource.read());
 
   useEffect(function addMessageCreatedListener() {
     const onMessageCreated = message => setMessages(messages => [...messages, message]);

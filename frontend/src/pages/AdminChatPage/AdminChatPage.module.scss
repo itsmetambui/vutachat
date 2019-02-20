@@ -1,0 +1,36 @@
+.Main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+
+  padding: 5rem 5rem 0 5rem;
+}
+
+.Sidebar {
+  
+}
+
+.Header {
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Button {
+  font-size: 4rem;
+  padding-left: 1rem;
+  background-color: black;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.ChatBox {
+  flex: 1;
+}
+
+.ChatForm {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
