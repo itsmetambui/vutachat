@@ -6,6 +6,7 @@ const {
 
 const gravatar = require('../../hooks/gravatar');
 const addUserToRoomWithMaster = require('../../hooks/addUserToRoomWithMaster');
+const populateIntroduceMessage = require('../../hooks/populateIntroduceMessage');
 
 module.exports = {
   before: {
@@ -26,7 +27,7 @@ module.exports = {
     ],
     find: [],
     get: [],
-    create: [],
+    create: [populateIntroduceMessage()],
     update: [],
     patch: [],
     remove: []

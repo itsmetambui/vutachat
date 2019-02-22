@@ -5,6 +5,10 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return async context => {
     const { app, data, params } = context;
 
+    if(Array.isArray(data)) {
+      return context;
+    }
+
     const master = await app.service('master-user').find();
     const roomId = data.roomId ? data.roomId : `${params.user.email}|${master.email}`;
 
