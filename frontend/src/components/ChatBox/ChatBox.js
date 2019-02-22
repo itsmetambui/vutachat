@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-
+import cx from 'classnames';
 import client from '../../feathers';
 import ChatMessage from '../../components/Message/Message';
 
@@ -29,11 +29,11 @@ const ChatBox = ({messages}) => {
   }, [messages]);
 
   return (
-    <PerfectScrollbar ref={scrollDivRef}>
+    <PerfectScrollbar ref={scrollDivRef} className={styles.ScrollContainer}>
       <main className={styles.ChatBox} ref={contentRef}>
         {messages.map(message => {
           return (
-            <div key={message._id} >
+            <div key={message._id} className={cx({[styles.Self]: message.user.email === 'itsmetambui@gmail.com'})}>
               <ChatMessage
                 avatar={message.user.avatar} 
                 email={message.user.email} 

@@ -4,14 +4,14 @@ import Avatar from '../Avatar/Avatar';
 
 import styles from './Message.module.scss';
 
-const ChatMessage = ({avatar, email, createdAt, text, self}) => {
+const ChatMessage = ({avatar, createdAt, text}) => {
   return (
     <div className={styles.Wrapper}>
       <div className={styles.Message}>
         <Avatar src={avatar} />
         <div className={styles.MainContent}>
           <MessageText text={text} />
-          <span className={styles.Time}>{moment(createdAt).format('MMM Do, hh:mm:ss')}</span>
+          <span className={styles.Time}>{moment(createdAt).format('MMM Do, hh:mm')}</span>
         </div>
       </div>
     </div>

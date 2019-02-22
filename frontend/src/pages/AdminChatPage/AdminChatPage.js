@@ -6,6 +6,7 @@ import fetchUserAndMessage from '../../services/AdminChatResource';
 import ChatBox from '../../components/ChatBox/ChatBox';
 import ChatForm from '../../components/ChatForm/ChatForm';
 import UserSelect from '../../components/UserSelect/UserSelect';
+import Spinner from '../../components/Spinner/Spinner';
 
 import styles from './AdminChatPage.module.scss'
 import fetchMessage from '../../services/MessageResource';
@@ -19,6 +20,7 @@ const AdminChatPage = () => {
   const [users, setUsers] = useState(loadedUsers);
   const [messages, setMessages] = useState(loadedMessages);
   const [selectedUser, setSelectedUser] = useState(users[0]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(function addUserCreatedListener() {
     const onUserCreated = user => setUsers(users => [...users, user]);
@@ -45,9 +47,11 @@ const AdminChatPage = () => {
   }
 
   const handleUserSelected = async user => {
+    setLoading(true);
     setSelectedUser(user);
     const messages = await fetchMessage(user.rooms[0]);
     setMessages(messages);
+    setLoading(false);
   }
 
   return (
@@ -62,7 +66,7 @@ const AdminChatPage = () => {
       </aside>
 
       <div className={styles.ChatBox}>
-        <ChatBox messages={messages} />
+        {loading ? <Spinner /> : <ChatBox messages={messages} />}
       </div>
       
       <div className={styles.ChatForm}>

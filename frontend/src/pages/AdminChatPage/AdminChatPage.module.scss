@@ -1,5 +1,5 @@
 .AdminChatPage {
-  padding: 5rem 5rem 0 5rem;
+  padding: 5rem 4rem 0 2rem;
   height: 100vh;
   width: 100vw;
 
@@ -35,6 +35,9 @@
 .ChatBox {
   grid-area: chatbox;
   height: 65vh; //TODO: investigate other elegant solutions
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .ChatForm {
