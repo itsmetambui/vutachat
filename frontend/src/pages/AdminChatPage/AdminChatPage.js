@@ -1,6 +1,6 @@
 // TODO: investigate why selectedUser not updated correct with hooks
 import React, { useState, useEffect } from 'react';
-import {unstable_createResource as createResource} from 'react-cache'
+import {unstable_createResource as createResource} from '../../vendors/react-cache'
 
 import client from '../../feathers';
 import fetchUserAndMessage from '../../services/AdminChatResource';

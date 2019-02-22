@@ -2,7 +2,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 
 import LoginPage from './pages/LoginPage/LoginPage';
 import ChatPage from './pages/ChatPage/ChatPage';
-import AdminChatPage from './pages/AdminChatPage/AdminChatPage';
+// import AdminChatPage from './pages/AdminChatPage/AdminChatPage';
 import Admin from './pages/AdminChatPage/Admin';
 import Spinner from './components/Spinner/Spinner';
 import client from './feathers';
