@@ -45,3 +45,11 @@
   margin-bottom: 2rem;
   grid-area: form;
 }
+
+.Container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -3,6 +3,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 import LoginPage from './pages/LoginPage/LoginPage';
 import ChatPage from './pages/ChatPage/ChatPage';
 import AdminChatPage from './pages/AdminChatPage/AdminChatPage';
+import Admin from './pages/AdminChatPage/Admin';
 import Spinner from './components/Spinner/Spinner';
 import client from './feathers';
 
@@ -57,7 +58,8 @@ const Application = () => {
   if(isAuthenticated == null) return spinner;
   if(!isAuthenticated) return <LoginPage />;
   if(isAdmin == null) return spinner;
-  if(isAdmin) return <Suspense fallback={<div className={styles.Container}><Spinner /></div>}><AdminChatPage currentUser={currentUser} /></Suspense>;
+  // if(isAdmin) return <Suspense fallback={<div className={styles.Container}><Spinner /></div>}><AdminChatPage currentUser={currentUser} /></Suspense>;
+  if(isAdmin) return <Admin currentUser={currentUser} />;
   return <Suspense fallback={<div className={styles.Container}><Spinner /></div>}><ChatPage currentUser={currentUser} /></Suspense>;
 };
 

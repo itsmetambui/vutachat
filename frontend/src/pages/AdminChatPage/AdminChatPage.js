@@ -1,3 +1,4 @@
+// TODO: investigate why selectedUser not updated correct with hooks
 import React, { useState, useEffect } from 'react';
 import {unstable_createResource as createResource} from 'react-cache'
 
@@ -31,7 +32,13 @@ const AdminChatPage = ({currentUser}) => {
   }, []);
 
   useEffect(function addMessageCreatedListener() {
-    const onMessageCreated = message => setMessages(messages => [...messages, message]);
+    const onMessageCreated = message => setMessages(messages => {
+      if(message.roomId === selectedUser.rooms[0]) {
+        return [...messages, message];
+      } else {
+        return messages;
+      } 
+    });
     messageService.on('created', onMessageCreated);
     return function removeListener() {
       messageService.removeListener('created', onMessageCreated);
