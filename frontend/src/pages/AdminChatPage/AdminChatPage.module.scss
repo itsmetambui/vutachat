@@ -1,5 +1,5 @@
 .AdminChatPage {
-  padding: 5rem 2rem 0 2rem;
+  padding: 5rem 5rem 0 5rem;
   height: 100vh;
   width: 100vw;
 
@@ -9,6 +9,7 @@
     'sidebar chatbox'
     'sidebar form';
   grid-gap: 2rem;
+  grid-template-columns: 30% 70%;
 }
 
 .Sidebar {
@@ -33,7 +34,7 @@
 
 .ChatBox {
   grid-area: chatbox;
-  height: 70vh; //TODO: investigate other elegant solutions
+  height: 65vh; //TODO: investigate other elegant solutions
 }
 
 .ChatForm {

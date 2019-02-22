@@ -8,7 +8,6 @@ import ChatForm from '../../components/ChatForm/ChatForm';
 import UserSelect from '../../components/UserSelect/UserSelect';
 
 import styles from './AdminChatPage.module.scss'
-import fetchUser from '../../services/UserResource';
 import fetchMessage from '../../services/MessageResource';
 
 const AdminChatResource = createResource(fetchUserAndMessage);

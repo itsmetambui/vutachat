@@ -26,7 +26,7 @@ const ChatBox = ({messages}) => {
     return function removeListener () { 
       messageService.removeListener('created', handler); 
     };
-  }, []);
+  }, [messages]);
 
   return (
     <PerfectScrollbar ref={scrollDivRef}>
