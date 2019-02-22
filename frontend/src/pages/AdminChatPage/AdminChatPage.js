@@ -15,7 +15,7 @@ const AdminChatResource = createResource(fetchUserAndMessage);
 const messageService = client.service('messages');
 const userService = client.service('users');
 
-const AdminChatPage = () => {
+const AdminChatPage = ({currentUser}) => {
   const { loadedUsers, loadedMessages } = AdminChatResource.read();
   const [users, setUsers] = useState(loadedUsers);
   const [messages, setMessages] = useState(loadedMessages);
@@ -66,7 +66,7 @@ const AdminChatPage = () => {
       </aside>
 
       <div className={styles.ChatBox}>
-        {loading ? <Spinner /> : <ChatBox messages={messages} />}
+        {loading ? <Spinner /> : <ChatBox messages={messages} currentUser={currentUser}/>}
       </div>
       
       <div className={styles.ChatForm}>

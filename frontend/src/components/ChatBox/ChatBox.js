@@ -7,7 +7,7 @@ import ChatMessage from '../../components/Message/Message';
 import styles from './ChatBox.module.scss';
 const messageService = client.service('messages');
 
-const ChatBox = ({messages}) => {
+const ChatBox = ({messages, currentUser}) => {
   const scrollDivRef = useRef(null);
   const contentRef = useRef(null);
 
@@ -33,7 +33,7 @@ const ChatBox = ({messages}) => {
       <main className={styles.ChatBox} ref={contentRef}>
         {messages.map(message => {
           return (
-            <div key={message._id} className={cx({[styles.Self]: message.user.email === 'itsmetambui@gmail.com'})}>
+            <div key={message._id} className={cx({[styles.Self]: message.user.email === currentUser.email})}>
               <ChatMessage
                 avatar={message.user.avatar} 
                 email={message.user.email} 

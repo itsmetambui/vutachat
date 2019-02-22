@@ -11,10 +11,14 @@ import styles from './App.module.scss';
 const Application = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   const [isAdmin, setIsAdmin] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
 
   const authenticate = async () => {
     try {
       await client.authenticate();
+      const jwt = await client.passport.getJWT();
+      const currentUser = await client.passport.verifyJWT(jwt);
+      setCurrentUser(currentUser);
       setIsAuthenticated(true);
     } catch(e) {
       setIsAuthenticated(false);
@@ -29,6 +33,7 @@ const Application = () => {
     const onAuthenticated = async jwt => {
       setIsAuthenticated(true);
       const payload = await client.passport.verifyJWT(jwt.accessToken);
+      setCurrentUser(payload);
       setIsAdmin(payload.isAdmin);
     }
     client.on('authenticated', onAuthenticated);
@@ -40,6 +45,7 @@ const Application = () => {
   useEffect(function addLogoutListener() {
     const onLogout = () => {
       setIsAuthenticated(false);
+      setCurrentUser(null);
     }
     client.on('logout', onLogout);
     return function removeListener() {
@@ -51,8 +57,8 @@ const Application = () => {
   if(isAuthenticated == null) return spinner;
   if(!isAuthenticated) return <LoginPage />;
   if(isAdmin == null) return spinner;
-  if(isAdmin) return <Suspense fallback={<div className={styles.Container}><Spinner /></div>}><AdminChatPage /></Suspense>;
-  return <Suspense fallback={<div className={styles.Container}><Spinner /></div>}><ChatPage /></Suspense>;
+  if(isAdmin) return <Suspense fallback={<div className={styles.Container}><Spinner /></div>}><AdminChatPage currentUser={currentUser} /></Suspense>;
+  return <Suspense fallback={<div className={styles.Container}><Spinner /></div>}><ChatPage currentUser={currentUser} /></Suspense>;
 };
 
 export default Application;

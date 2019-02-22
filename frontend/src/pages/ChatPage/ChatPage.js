@@ -12,7 +12,7 @@ import styles from './ChatPage.module.scss'
 const MessageResource = createResource(fetchMessage);
 const messageService = client.service('messages');
 
-const ChatPage = () => {
+const ChatPage = ({currentUser}) => {
   const [messages, setMessages] = useState(MessageResource.read());
 
   useEffect(function addMessageCreatedListener() {
@@ -37,7 +37,7 @@ const ChatPage = () => {
         <h1 className="header-primary">Here's my story <span role="img" aria-label="emoji-popcorn">🍿</span></h1>
         <button className={styles.Button} onClick={logout}><span role="img" aria-label="emoji-popcorn">👋</span></button>
       </div>
-      <ChatBox className={styles.ChatBox} messages={messages} />
+      <ChatBox className={styles.ChatBox} messages={messages} currentUser={currentUser} />
       <div className={styles.ChatForm}>
         <ChatForm className={styles.ChatForm} onSubmit={sendMessage} />
       </div>

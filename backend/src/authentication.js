@@ -28,7 +28,7 @@ module.exports = function (app) {
           // make sure params.payload exists
           context.params.payload = context.params.payload || {};
           // merge in a `test` property
-          Object.assign(context.params.payload, {isAdmin: app.get('master').email === context.params.user.email});
+          Object.assign(context.params.payload, {isAdmin: app.get('master').email === context.params.user.email, email: context.params.user.email});
         }
       ],
       remove: [
