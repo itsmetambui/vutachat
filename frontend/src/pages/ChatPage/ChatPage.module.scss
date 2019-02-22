@@ -5,6 +5,10 @@
   height: 100vh;
 
   padding: 5rem 5rem 0 5rem;
+
+  @media only screen and (max-width: 37.5em) {
+    padding: 5rem 2rem 0 2rem;
+  }
 }
 
 .Header {
