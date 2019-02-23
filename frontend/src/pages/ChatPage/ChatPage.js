@@ -1,30 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-import {unstable_createResource as createResource} from '../../vendors/react-cache'
+import { unstable_createResource as createResource } from '../../vendors/react-cache'
 
 import client from '../../feathers';
-import fetchMessage from '../../services/MessageResource';
+import { fetchMessages, createMessage } from '../../services/MessageResource';
 import ChatBox from '../../components/ChatBox/ChatBox';
 import ChatForm from '../../components/ChatForm/ChatForm';
+import useMessages from '../../hooks/useMessages.js';
 
 import styles from './ChatPage.module.scss'
 
-const MessageResource = createResource(fetchMessage);
-const messageService = client.service('messages');
+const MessageResource = createResource(fetchMessages);
 
 const ChatPage = ({currentUser}) => {
-  const [messages, setMessages] = useState(MessageResource.read());
+  const [ messages ] = useMessages(MessageResource.read());
 
-  useEffect(function addMessageCreatedListener() {
-    const onMessageCreated = message => setMessages(messages => [...messages, message]);
-    messageService.on('created', onMessageCreated);
-    return function removeListener() {
-      messageService.removeListener('created', onMessageCreated);
-    };
-  }, []);
-
-  const sendMessage = async message => {
-    return messageService.create({ text: message });
+  const sendMessage = async text => {
+    createMessage({ text });
   };
 
   const logout = () => {

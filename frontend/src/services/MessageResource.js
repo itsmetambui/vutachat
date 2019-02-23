@@ -1,15 +1,17 @@
 import client from '../feathers';
 const messageService = client.service('messages');
 
-const fetchMessage = async roomId => {
+export const fetchMessages = async (roomId, limit) => {
   const result =  await messageService.find({
     query: {
       $sort: { createdAt: -1 },
-      $limit: 25,
+      $limit: limit,
       roomId
     }
   });
   return result.data.reverse();
 }
 
-export default fetchMessage;
+export const createMessage = async message => {
+  messageService.create(message);
+}

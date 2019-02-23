@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import client from '../../feathers';
 import fetchUserAndMessage from '../../services/AdminChatResource';
-import fetchMessage from '../../services/MessageResource';
+import { fetchMessages } from '../../services/MessageResource';
 
 import ChatBox from '../../components/ChatBox/ChatBox';
 import ChatForm from '../../components/ChatForm/ChatForm';
@@ -59,7 +59,7 @@ export default class Admin extends Component {
 
   handleUserSelected = async user => {
     this.setState({loading: true, selectedUser: user});
-    const messages = await fetchMessage(user.rooms[0]);
+    const messages = await fetchMessages(user.rooms[0]);
     this.setState({loading: false, messages: messages});
   }
 
