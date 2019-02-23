@@ -1,11 +1,14 @@
 # Vutachat
-A simple project to showcase frontend skills (HTML/CSS)
+A simple project to showcase my skills, built with Feathersjs and React.
 
 Live demo [here](https://vutachat.herokuapp.com/)
 
-## About
+## Motivation
 
-This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications. And Create-react app for frontend development.
+* I want to build a chat application for self promotion.
+* I want to build a chat application to investigate Socket.io.
+* I want to apply the **new React hooks** in a project to simplify coding.
+* I want to apply React's **new Suspense and react-cache** for data fetching in project.
 
 ## Getting Started
 
