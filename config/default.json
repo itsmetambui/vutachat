@@ -45,5 +45,6 @@
   "master": {
     "email": "MASTER_EMAIL",
     "password": "MASTER_PASSWORD"
-  }
+  },
+  "slackWebhook": "SLACK_WEBHOOK"
 }

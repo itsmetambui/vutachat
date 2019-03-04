@@ -4,13 +4,14 @@ const processMessage = require('../../hooks/process-message');
 
 const populateUser = require('../../hooks/populate-user');
 const addRoomQuery = require('../../hooks/add-room-query');
+const notifyToSlack = require('../../hooks/notify-to-slack');
 
 module.exports = {
   before: {
     all: [authenticate('jwt')],
     find: [addRoomQuery()],
     get: [],
-    create: [processMessage()],
+    create: [processMessage(), notifyToSlack('message-created')],
     update: [],
     patch: [],
     remove: []

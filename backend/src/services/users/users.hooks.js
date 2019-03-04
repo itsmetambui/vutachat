@@ -7,13 +7,14 @@ const {
 const gravatar = require('../../hooks/gravatar');
 const addUserToRoomWithMaster = require('../../hooks/add-user-to-room-with-master');
 const populateIntroduceMessage = require('../../hooks/populate-introduce-message');
+const notifyToSlack = require('../../hooks/notify-to-slack');
 
 module.exports = {
   before: {
     all: [],
     find: [ authenticate('jwt') ],
     get: [ authenticate('jwt') ],
-    create: [hashPassword(), gravatar(), addUserToRoomWithMaster()],
+    create: [hashPassword(), gravatar(), addUserToRoomWithMaster(), notifyToSlack('user-created')],
     update: [ hashPassword(),  authenticate('jwt') ],
     patch: [ hashPassword(),  authenticate('jwt') ],
     remove: [ authenticate('jwt') ]
