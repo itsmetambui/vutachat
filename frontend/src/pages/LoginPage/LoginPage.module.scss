@@ -47,3 +47,11 @@
   bottom: -4rem;
   font-size: 1.7rem;
 }
+
+.Container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -4,13 +4,16 @@ import * as Yup from 'yup';
 import cx from 'classnames';
 
 import client from '../../feathers';
+import Spinner from '../../components/Spinner/Spinner';
 
 import styles from './LoginPage.module.scss';
 
 const LoginPage = () => {
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const login = async ({email, password}) => {
+    setIsLoading(true);
     try {
       await client.authenticate({strategy: 'local', email, password});
     } catch(loginErr) {
@@ -20,8 +23,13 @@ const LoginPage = () => {
       } catch(signupErr) {
         setError(signupErr);
       }
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  const spinner = <div className={styles.Container}><Spinner /></div>;
+  if(isLoading) return spinner;
 
   return (
     <div className={styles.LoginPage}>
