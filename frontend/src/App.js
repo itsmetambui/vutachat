@@ -32,9 +32,9 @@ const Application = () => {
 
   useEffect(function addAuthenticatedListener() {
     const onAuthenticated = async jwt => {
-      setIsAuthenticated(true);
       const payload = await client.passport.verifyJWT(jwt.accessToken);
       setCurrentUser(payload);
+      setIsAuthenticated(true);
       setIsAdmin(payload.isAdmin);
     }
     client.on('authenticated', onAuthenticated);

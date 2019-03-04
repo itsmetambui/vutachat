@@ -1,7 +1,6 @@
-// Use this hook to manipulate incoming or outgoing data.
-// For more information on hooks, see: http://docs.feathersjs.com/api/hooks.html
+/* eslint-disable */
 
-module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
+module.exports = function (options = {}) {
   return async context => {
     const { app, result } = context;
 
@@ -30,9 +29,13 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 };
 
 const introduceMessages = [
-  'Hi, my name\'s Tam',
-  'I\'m a web developer with 3 years\' experience in web development',
-  'In 2016, I got my first job as a junior frontend developer at TMA Solutions in HCM, Vietnam. I had the chance working with highly experienced partners like Nokia, building large Single Page Applications for networking.',
-  'While woking at TMA Solution, I was also exposed to backend development with dockerization and continous delivery.',
-  'Two years later I moved to Can Tho and started to work for Axon Active Vietnam. Here, as a multipnational team, we applied Agile development through Scrum framework, develop and deploy Fintech applications for Swiss partners.'
+  `My name is Tam.`,
+  `I'm a Javascript Fullstack Developer with 3 years of experiences in Web development.
+   I speak HTML/CSS, React, Angular, Node and well versed in other libraries like Redux, Feathersjs, and Loopback.
+   TDD development, CI/CD and Containerization are also there in my toolbox.`,
+  `I love being part of a team, working in an agile environment, together toward a goal.
+   I love to take initiative and ownership. I am always thriving for growth as I am an early adopter for new concepts like Suspense, Hooks, react-cache…
+   I love to put my new knowledge to use on side projects before applying them for real works.
+   You can check out my works at itsmetambui.now.sh .`,
+  `If you have a position available, I'd love to hear from you, please shoot me a message :).`
 ];
