@@ -9,6 +9,7 @@ Live demo [here](https://vutachat.herokuapp.com/)
 * I want to build a chat application to investigate Socket.io.
 * I want to apply the **new React hooks** in a project to simplify coding.
 * I want to apply React's **new Suspense and react-cache** for data fetching in project.
+* I want to expirement with Slack webhooks.
 
 ## Getting Started
 
@@ -20,8 +21,8 @@ Getting up and running is as easy as 1, 2, 3.
     ```
     cd path/to/vutachat; npm install
     ```
-
-3. Start your app
+3. Update your `config/default.json` accordingly.
+4. Start your app
 
     ```
     npm start
