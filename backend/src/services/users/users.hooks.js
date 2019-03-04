@@ -5,8 +5,8 @@ const {
 } = require('@feathersjs/authentication-local').hooks;
 
 const gravatar = require('../../hooks/gravatar');
-const addUserToRoomWithMaster = require('../../hooks/addUserToRoomWithMaster');
-const populateIntroduceMessage = require('../../hooks/populateIntroduceMessage');
+const addUserToRoomWithMaster = require('../../hooks/add-user-to-room-with-master');
+const populateIntroduceMessage = require('../../hooks/populate-introduce-message');
 
 module.exports = {
   before: {

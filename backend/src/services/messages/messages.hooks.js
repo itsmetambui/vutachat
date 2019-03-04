@@ -3,7 +3,7 @@ const { authenticate } = require('@feathersjs/authentication').hooks;
 const processMessage = require('../../hooks/process-message');
 
 const populateUser = require('../../hooks/populate-user');
-const addRoomQuery = require('../../hooks/addRoomQuery');
+const addRoomQuery = require('../../hooks/add-room-query');
 
 module.exports = {
   before: {
