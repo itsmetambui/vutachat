@@ -6,7 +6,7 @@
     "@feathersjs/client": "^3.7.8",
     "classnames": "^2.2.6",
     "formik": "^1.5.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
     "react-cache": "^2.0.0-alpha.1",
